@@ -1,0 +1,86 @@
+---
+import SocialLink from '@/components/SocialLink.astro';
+const { source, className } = Astro.props;
+
+import {
+    IoCall,
+    IoGlobeOutline,
+    IoLogoFacebook,
+    IoLogoFoursquare,
+    IoLogoInstagram,
+    IoLogoLinkedin,
+    IoLogoMastodon,
+    IoLogoMedium,
+    IoLogoPinterest,
+    IoLogoReddit,
+    IoLogoSoundcloud,
+    IoLogoTiktok,
+    IoLogoTumblr,
+    IoLogoTwitter,
+    IoLogoVimeo,
+    IoLogoYoutube,
+    IoMail,
+} from 'react-icons/io5';
+
+const {
+    email,
+    facebook,
+    foursquare,
+    instagram,
+    linkedin,
+    mastodon,
+    medium,
+    phone,
+    pinterest,
+    reddit,
+    soundcloud,
+    tiktok,
+    tumblr,
+    twitter,
+    vimeo,
+    website,
+    youtube,
+} = source;
+---
+
+<ul class={'social-links ' + className}>
+    <SocialLink ariaLabel="twitter" href={twitter} icon={IoLogoTwitter} />
+    <SocialLink ariaLabel="mastodon" href={mastodon} icon={IoLogoMastodon} />
+    <SocialLink ariaLabel="instagram" href={instagram} icon={IoLogoInstagram} />
+    <SocialLink ariaLabel="youtube" href={youtube} icon={IoLogoYoutube} />
+    <SocialLink ariaLabel="linkedin" href={linkedin} icon={IoLogoLinkedin} />
+    <SocialLink ariaLabel="medium" href={medium} icon={IoLogoMedium} />
+    <SocialLink ariaLabel="pinterest" href={pinterest} icon={IoLogoPinterest} />
+    <SocialLink ariaLabel="soundcloud" href={soundcloud} icon={IoLogoSoundcloud} />
+    <SocialLink ariaLabel="tumblr" href={tumblr} icon={IoLogoTumblr} />
+    <SocialLink ariaLabel="reddit" href={reddit} icon={IoLogoReddit} />
+    <SocialLink ariaLabel="facebook" href={facebook} icon={IoLogoFacebook} />
+    <SocialLink ariaLabel="vimeo" href={vimeo} icon={IoLogoVimeo} />
+    <SocialLink ariaLabel="tiktok" href={tiktok} icon={IoLogoTiktok} />
+    <SocialLink ariaLabel="foursquare" href={foursquare} icon={IoLogoFoursquare} />
+    <SocialLink ariaLabel="website" href={website} icon={IoGlobeOutline} />
+    <SocialLink ariaLabel="email" href={email && `mailto:${email}`} icon={IoMail} />
+    <SocialLink ariaLabel="telephone" href={phone && `tel:${phone}`} icon={IoCall} />
+</ul>
+
+<style>
+    .social-links {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: fit-content;
+
+        nav & {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 768px) {
+        .social-links.social-links {
+            display: flex;
+            flex-wrap: wrap;
+            /* justify-content: end; */
+        }
+    }
+</style>

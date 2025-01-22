@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'a'> {}
+
+const { href, ...attrs } = Astro.props;
+---
+
+<a href={href} class="pill" {...attrs}>
+    <slot />
+</a>
+
+<style>
+    .pill {
+        font-size: var(--fs-200);
+        text-decoration: none;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4rem;
+        color: var(--color-accent-primary);
+        border: 1px solid currentColor;
+
+        display: flex;
+        align-items: center;
+    }
+</style>

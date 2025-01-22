@@ -1,0 +1,57 @@
+---
+import ExternalPill from '@/components/ExternalPill.astro';
+import Pill from '@/components/Pill.astro';
+---
+
+<ul class="bio-nav">
+    <li>
+        <Pill href="/about">Long Bio</Pill>
+    </li>
+    <li class="medium-bio">
+        <Pill href="/about/medium-bio">Medium Bio</Pill>
+    </li>
+    <li class="short-bio">
+        <Pill href="/about/short-bio">Short Bio</Pill>
+    </li>
+    <li>
+        <ExternalPill href="/tyler-taylor-CV-2024-01-11.pdf" target="_blank">CV</ExternalPill>
+    </li>
+</ul>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const navLinks: HTMLAnchorElement[] = Array.from(document.querySelectorAll('.bio-nav a'));
+        navLinks.forEach((link) => {
+            const cleanHref = link.href?.match(/\/about.*/)?.[0];
+
+            if (cleanHref === window.location.pathname) {
+                link?.parentElement?.classList.add('hidden');
+            } else {
+                link?.parentElement?.classList.remove('hidden');
+            }
+        });
+    });
+</script>
+
+<style>
+    .bio-nav {
+        display: flex;
+        gap: var(--spacing-200);
+    }
+
+    .medium-bio,
+    .short-bio {
+        display: none;
+    }
+
+    @media (min-width: 768px) {
+        .medium-bio,
+        .short-bio {
+            display: block;
+        }
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
