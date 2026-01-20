@@ -3,16 +3,14 @@ interface Props {
     title: string;
     year: number;
     slug: string;
-    ensemble: string;
 }
 
-const { title, year, slug, ensemble } = Astro.props;
+const { title, year, slug } = Astro.props;
 ---
 
 <div class="first-line">
     <a class="title" href={slug}>{title}</a>
     <span class="for">for</span>
-    <div class="ensemble">{ensemble}</div>
     <div class="year">({year})</div>
 </div>
 

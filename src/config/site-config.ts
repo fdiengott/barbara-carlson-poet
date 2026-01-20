@@ -19,14 +19,13 @@ export type SiteConfig = {
     footerNavLinks?: Link[];
     socialLinks?: Link[];
     newsPerPage?: number;
-    pressPerPage?: number;
+    eventsPerPage?: number;
     worksPerPage?: number;
 };
 
 const siteConfig: SiteConfig = {
-    title: 'Tyler Taylor',
-    subtitle: 'Composer, performer',
-    description: 'Tyler Taylor, composer',
+    title: 'Barbara Siegel Carlson',
+    description: 'Barbara Siegel Carlson, poet',
     image: {
         src: '../assets/hero.jpg',
         //  TODO:
@@ -38,24 +37,12 @@ const siteConfig: SiteConfig = {
             href: '/about',
         },
         {
-            text: 'Works',
-            href: '/works',
+            text: 'Publications',
+            href: '/publications',
         },
         {
-            text: 'News',
-            href: '/news',
-        },
-        {
-            text: 'Gallery',
-            href: '/gallery',
-        },
-        {
-            text: 'Press',
-            href: '/press',
-        },
-        {
-            text: 'Blog',
-            href: '/blog',
+            text: 'Events',
+            href: '/events',
         },
         {
             text: 'Contact',
@@ -64,7 +51,7 @@ const siteConfig: SiteConfig = {
     ],
     footerNavLinks: [],
     newsPerPage: 8,
-    pressPerPage: 8,
+    eventsPerPage: 8,
     worksPerPage: 8,
 };
 

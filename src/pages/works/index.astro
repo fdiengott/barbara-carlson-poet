@@ -2,63 +2,27 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { slugify } from '@/utils/common-utils';
-import type { WorkType } from '@/content.config';
-import { removeTemplates, sortWorksByDate } from '@/utils/data-utils';
+import { removeTemplates } from '@/utils/data-utils';
 import WorkCard from '@/components/WorkCard.astro';
-import Pill from '@/components/Pill.astro';
 
-const works = await getCollection('works');
-const cleanWorks = removeTemplates(works).sort(sortWorksByDate);
-
-const CATEGORY_ORDER = ['orchestral', 'chamber', 'mixed ensemble', 'wind band', 'solo', 'installation'] as const;
-
-const workCategories: string[] = Array.from(new Set(cleanWorks.map((work) => work.data.category.toLowerCase()))).sort((a: string, b: string) => {
-    const aIndex = CATEGORY_ORDER.indexOf(a as (typeof CATEGORY_ORDER)[number]);
-    const bIndex = CATEGORY_ORDER.indexOf(b as (typeof CATEGORY_ORDER)[number]);
-    // INFO: add infinity so that a new category will always be at the end
-    return (aIndex < 0 ? Infinity : aIndex) - (bIndex < 0 ? Infinity : bIndex);
-});
-
-const worksByCategory = cleanWorks.reduce<Record<string, WorkType[]>>((acc, work) => {
-    const category = work.data.category.toLowerCase();
-
-    acc[category] ||= [];
-    acc[category].push(work);
-
-    return acc;
-}, {});
+const works = await getCollection('book');
+const cleanWorks = removeTemplates(works);
 ---
 
 <BaseLayout title="Works" description="My works">
     <div class="title-wrapper">
         <h1>Works</h1>
-        <ul class="category-pill-list">
+    </div>
+    <ul class="category-list">
+        <ul class="works-list">
             {
-                workCategories.map((category) => (
-                    <li>
-                        <Pill href={`#${category}`}>{category}</Pill>
+                cleanWorks.map((work) => (
+                    <li class="work-list-item">
+                        <WorkCard {...work.data} slug={`/works/${slugify(work.data.title)}`} />
                     </li>
                 ))
             }
         </ul>
-    </div>
-    <ul class="category-list">
-        {
-            workCategories.map((category: string) => (
-                <li>
-                    <h2 id={category} class="category-title">
-                        {category}
-                    </h2>
-                    <ul class="works-list">
-                        {worksByCategory[category].map((work) => (
-                            <li class="work-list-item">
-                                <WorkCard {...work.data} slug={`/works/${slugify(work.data.title)}`} />
-                            </li>
-                        ))}
-                    </ul>
-                </li>
-            ))
-        }
     </ul>
 </BaseLayout>
 

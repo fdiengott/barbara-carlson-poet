@@ -1,26 +1,41 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { getEntry, render } from 'astro:content';
-
-const entry = await getEntry('contact', 'index');
-const contact = entry?.data;
-
-const { Content } = await render(entry);
 ---
 
 <BaseLayout title={contact?.title} description={contact?.description}>
     <section class="page-hero pb-4">
-        <h1>{contact?.title}</h1>
+        <h1>Contact</h1>
     </section>
 
     <section class="section pt-0">
         <div class="bg-image">
             <div class="text-wrapper">
                 <Content />
-                <dl class="details-grid">
-                    <dt>Email</dt>
-                    <dd>tylertaylorcomposer@gmail.com</dd>
-                </dl>
+                <!-- <dl class="details-grid"> -->
+                <!--     <dt>Email</dt> -->
+                <!--     <dd>tylertaylorcomposer@gmail.com</dd> -->
+                <!-- </dl> -->
+
+                <form action="/form-success/" method="post" name="contact-form">
+                    <input type="hidden" name="form-name" value="contact-form" />
+
+                    <fieldset class="form-group">
+                        <input type="text" name="name" id="name-input" required placeholder=" " />
+                        <label for="name-input">Name</label>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input type="email" name="email" id="email-input" required placeholder=" " />
+                        <label for="email-input">Email</label>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <textarea name="message" id="message-input" rows="8" required placeholder=" "></textarea>
+                        <label for="message-input">Message</label>
+                    </fieldset>
+
+                    <button class="submit" type="submit">
+                        <span>Submit</span>
+                    </button>
+                </form>
             </div>
         </div>
     </section>
@@ -63,19 +78,5 @@ const { Content } = await render(entry);
         border-radius: var(--spacing-200);
         padding: var(--spacing-400);
         margin-inline: var(--spacing-200);
-    }
-
-    .details-grid {
-        display: flex;
-        flex-direction: column;
-        max-width: 100%;
-    }
-
-    @media (min-width: 768px) {
-        .details-grid {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 1rem 2rem;
-        }
     }
 </style>

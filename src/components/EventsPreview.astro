@@ -1,12 +1,12 @@
 ---
 import { render } from 'astro:content';
 
-const { press } = Astro.props;
-const { linkText, linkUrl, publication } = press?.data;
-const { Content } = await render(press);
+const { event } = Astro.props;
+const { linkText, linkUrl, publication } = event?.data;
+const { Content } = await render(event);
 ---
 
-<article class="press-preview">
+<article class="event-preview">
     <a class="link" href={linkUrl} target="_blank" rel="noopener noreferrer">
         {linkText}
     </a>
@@ -15,7 +15,7 @@ const { Content } = await render(press);
 </article>
 
 <style>
-    .press-preview p {
+    .event-preview p {
         margin: 0;
     }
 </style>

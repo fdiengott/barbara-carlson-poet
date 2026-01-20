@@ -1,5 +1,4 @@
 ---
-import { getCollection } from 'astro:content';
 import NavLink from './NavLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import Social from '@/components/Social.astro';
@@ -7,22 +6,6 @@ import siteConfig from '@/config/site-config';
 import social from '@/config/social.json';
 
 const navLinks = siteConfig.headerNavLinks || [];
-const blogs = await getCollection('blog');
-const gallery = await getCollection('gallery');
-const news = await getCollection('news');
-const linksWithContent = navLinks.filter((link) => {
-    if (blogs.length <= 1 && link.href === '/blog') {
-        return false;
-    }
-    if (gallery.length <= 1 && link.href === '/gallery') {
-        return false;
-    }
-    if (news.length <= 1 && link.href === '/news') {
-        return false;
-    }
-
-    return true;
-});
 ---
 
 <div class="nav-height"></div>
@@ -34,8 +17,8 @@ const linksWithContent = navLinks.filter((link) => {
                     <span class="menu-icon"></span>
                 </button>
                 <a class="site-title" href="/" tabindex="1">
-                    <b>Tyler Taylor</b>
-                    <span>Composer</span>
+                    <b>Barbara Siegel Carlson</b>
+                    <span>Poet</span>
                 </a>
             </div>
 
@@ -48,7 +31,7 @@ const linksWithContent = navLinks.filter((link) => {
         <nav class="nav-links">
             <ul id="menu-items" class="menu">
                 {
-                    linksWithContent.map((link) => (
+                    navLinks.map((link) => (
                         <li>
                             <NavLink href={link.href}>{link.text}</NavLink>
                         </li>

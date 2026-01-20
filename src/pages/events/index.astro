@@ -9,34 +9,34 @@ import Pagination from '@/components/Pagination.astro';
 import siteConfig from '@/config/site-config';
 import { sortByFileName } from '@/utils/data-utils';
 
-const pressPieces = await getCollection('press');
-const cleanPressPieces = removeTemplates(pressPieces);
-const totalPages = Math.ceil(cleanPressPieces.length / (siteConfig?.pressPerPage || 4));
+const events = await getCollection('event');
+const cleanEvents = removeTemplates(events);
+const totalPages = Math.ceil(cleanEvents.length / (siteConfig?.eventsPerPage || 4));
 
-const pressOnFirstPage = cleanPressPieces.sort(sortByFileName).slice(0, siteConfig.pressPerPage || 4);
+const eventsOnFirstPage = cleanEvents.sort(sortByFileName).slice(0, siteConfig.eventsPerPage || 4);
 
 const page: Pick<Page, 'data' | 'url' | 'currentPage' | 'lastPage'> = {
-    data: pressOnFirstPage,
+    data: eventsOnFirstPage,
     url: {
         prev: undefined,
-        next: '/press/2',
-        first: '/press/1',
-        last: `/press/${totalPages}`,
-        current: '/press/1',
+        next: '/events/2',
+        first: '/events/1',
+        last: `/events/${totalPages}`,
+        current: '/events/1',
     },
     currentPage: 1,
     lastPage: totalPages,
 };
 ---
 
-<BaseLayout title="Works" description="My works">
-    <h1>Press</h1>
+<BaseLayout title="Events" description="Events">
+    <h1>Events</h1>
     <ul>
         {
-            pressOnFirstPage.map((piece) => (
+            eventsOnFirstPage.map((event) => (
                 <Card>
-                    <ExternalLink linkUrl={piece.data.linkUrl} title={piece.data.linkText} />
-                    <p>{piece.data.publication}</p>
+                    <ExternalLink linkUrl={event.data.linkUrl} title={event.data.linkText} />
+                    <p>{event.data.publication}</p>
                 </Card>
             ))
         }

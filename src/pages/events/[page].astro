@@ -9,24 +9,24 @@ import Pagination from '@/components/Pagination.astro';
 import siteConfig from '@/config/site-config';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-    const pressPieces = removeTemplates(await getCollection('press')).sort(sortByFileName);
+    const events = removeTemplates(await getCollection('event')).sort(sortByFileName);
 
-    return paginate(pressPieces, { pageSize: siteConfig.pressPerPage || 4 });
+    return paginate(events, { pageSize: siteConfig.eventsPerPage || 4 });
 }
 
-type Props = { page: Page<CollectionEntry<'press'>> };
+type Props = { page: Page<CollectionEntry<'event'>> };
 
 const { page } = Astro.props;
 ---
 
-<BaseLayout title="Works" description="My works">
-    <h1>Press</h1>
+<BaseLayout title="Events" description="Events">
+    <h1>Events</h1>
     <ul>
         {
-            page.data.map((piece) => (
+            page.data.map((event) => (
                 <Card>
-                    <ExternalLink linkUrl={piece.data.linkUrl} title={piece.data.linkText} />
-                    <p>{piece.data.publication}</p>
+                    <ExternalLink linkUrl={event.data.linkUrl} title={event.data.linkText} />
+                    <p>{event.data.publication}</p>
                 </Card>
             ))
         }

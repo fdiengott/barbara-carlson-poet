@@ -1,45 +1,43 @@
 ---
-import { Image } from 'astro:assets';
-import { getEntry } from 'astro:content';
-import PressLatest from '@/components/PressLatest.astro';
-import WorkLatest from '@/components/WorkLatest.astro';
+// import { Image } from 'astro:assets';
+// import { getCollection, getEntry } from 'astro:content';
+// import BookPreview from '@/components/BookPreview.astro';
+// import { removeTemplates } from '@/utils/data-utils';
 
-const entry = await getEntry('hero', 'index');
-const { title, subtitle, image } = entry?.data ?? {};
+// const entry = await getEntry('hero', 'index');
+// const { title, subtitle, image } = entry?.data ?? {};
+
+// // Get two most recent books
+// const rawBooks = await getCollection('book');
+// const books = removeTemplates(rawBooks);
+// const recentBooks = books.toSorted((a, b) => b.data.year - a.data.year).slice(0, 2);
 ---
 
 <section id="hero">
-    <div class="title-wrapper">
-        {title && <h1 class="title">{title}</h1>}
-        {subtitle && <p class="subtitle">{subtitle}</p>}
-    </div>
-    <figure>
-        {image && <Image class="w-full" src={image.src} loading="eager" decoding="async" alt={image.alt || ''} height="576" width="768" />}
-    </figure>
-    <div class="max-w-none prose prose-dante sm:prose-lg content-wrapper">
-        <PressLatest />
-        <WorkLatest />
+    <div class="content-wrapper">
+        <!-- { -->
+        <!--     recentBooks.map((book) => ( -->
+        <!--         <BookPreview -->
+        <!--             title={book.data.title} -->
+        <!--             publisher={book.data.publisher} -->
+        <!--             year={book.data.year} -->
+        <!--             description={book.data.description} -->
+        <!--             image={book.data.image} -->
+        <!--             linkUrl={book.data.linkUrl} -->
+        <!--         /> -->
+        <!--     )) -->
+        <!-- } -->
     </div>
 </section>
 
 <style is:global>
-    figure {
-        margin-block: var(--spacing-200) var(--spacing-400);
-    }
-
-    .title-wrapper {
-        margin-block-end: var(--spacing-200);
-    }
-
-    .title {
-        font-family: Newsreader, ui-serif, Georgia, serif;
-        line-height: 1.2;
-        font-weight: 500;
-        margin: 0;
-    }
-
     .content-wrapper {
         display: grid;
         gap: var(--spacing-400);
+    }
+
+    .section-title {
+        font-style: italic;
+        margin: 0;
     }
 </style>
