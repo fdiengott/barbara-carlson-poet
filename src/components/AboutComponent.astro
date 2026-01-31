@@ -1,20 +1,21 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import AboutNav from '@/components/AboutNav.astro';
 import { optimizedImageProps } from '@/constants/images';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+    bio: CollectionEntry<'about'>;
+}
 
 const { bio } = Astro.props;
 const { title, description, image } = bio.data;
 ---
 
 <BaseLayout title={title} description={description}>
-    <div class="about-header">
-        <h1>{title}</h1>
-        <AboutNav />
-    </div>
+    <h1>{title}</h1>
     <div class="about">
-        {image && <Image src={image} alt="About" width={750} height={750} {...optimizedImageProps} />}
+        {image && <Image src={image.src} alt={image.alt} width={750} height={750} {...optimizedImageProps} />}
         <slot />
     </div>
 </BaseLayout>
@@ -22,14 +23,5 @@ const { title, description, image } = bio.data;
 <style is:global>
     .about :is(p, img) {
         margin-bottom: 1.5rem;
-    }
-</style>
-
-<style>
-    .about-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
     }
 </style>

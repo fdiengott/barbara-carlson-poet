@@ -1,32 +1,21 @@
 ---
-// import { Image } from 'astro:assets';
-// import { getCollection, getEntry } from 'astro:content';
-// import BookPreview from '@/components/BookPreview.astro';
-// import { removeTemplates } from '@/utils/data-utils';
+import { getCollection } from 'astro:content';
+import BookPreview from '@/components/BookPreview.astro';
+import { removeTemplates } from '@/utils/data-utils';
 
-// const entry = await getEntry('hero', 'index');
-// const { title, subtitle, image } = entry?.data ?? {};
-
-// // Get two most recent books
-// const rawBooks = await getCollection('book');
-// const books = removeTemplates(rawBooks);
-// const recentBooks = books.toSorted((a, b) => b.data.year - a.data.year).slice(0, 2);
+// Get two most recent books
+const rawBooks = await getCollection('book');
+const books = removeTemplates(rawBooks);
+const recentBooks = books.toSorted((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()).slice(0, 2);
 ---
 
 <section id="hero">
     <div class="content-wrapper">
-        <!-- { -->
-        <!--     recentBooks.map((book) => ( -->
-        <!--         <BookPreview -->
-        <!--             title={book.data.title} -->
-        <!--             publisher={book.data.publisher} -->
-        <!--             year={book.data.year} -->
-        <!--             description={book.data.description} -->
-        <!--             image={book.data.image} -->
-        <!--             linkUrl={book.data.linkUrl} -->
-        <!--         /> -->
-        <!--     )) -->
-        <!-- } -->
+        {
+            recentBooks.map((book) => (
+                <BookPreview title={book.data.title} publisher={book.data.publisher} date={book.data.date} image={book.data.image} url={book.data.url} />
+            ))
+        }
     </div>
 </section>
 

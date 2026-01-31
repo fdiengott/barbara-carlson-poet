@@ -10,14 +10,14 @@ const book = defineCollection({
     loader: glob({ pattern: '**/*.md', base: 'src/content/books' }),
     schema: z.object({
         title: z.string(),
-        publisher: z.string(),
-        year: z.number(),
-        description: z.string(),
+        description: z.string().optional(),
+        publisher: z.string().optional(),
+        date: z.string().or(z.date()),
         image: z.object({
             src: z.string(),
             alt: z.string(),
         }),
-        linkUrl: z.string(),
+        url: z.string(),
     }),
 });
 
@@ -94,9 +94,25 @@ const event = defineCollection({
     schema: z.object({
         title: z.string(),
         date: z.coerce.date(),
+        time: z.string().optional(),
+        address: z.string().optional(),
         description: z.string().optional(),
         linkUrl: z.string().optional(),
+        eventType: z.enum(['reading', 'recording', 'interview']),
     }),
 });
 
-export const collections = { hero, book, poem, translation, essay, press, interview, event };
+const about = defineCollection({
+    loader: glob({ pattern: '**/*.md', base: 'src/content/about' }),
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            description: z.string().optional(),
+            image: z.object({
+                src: image(),
+                alt: z.string(),
+            }),
+        }),
+});
+
+export const collections = { about, hero, book, poem, translation, essay, press, interview, event };

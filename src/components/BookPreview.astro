@@ -1,26 +1,23 @@
 ---
-// Stand-in component for book details - used on Hero page and Book details route
 // TODO: Flesh out styling and additional details as needed
 
 interface Props {
     title: string;
-    publisher: string;
-    year: number;
-    description: string;
+    publisher?: string;
+    date: string;
     image: {
         src: string;
         alt: string;
     };
-    linkUrl: string;
+    url: string;
 }
 
-const { title, publisher, year, description, image, linkUrl } = Astro.props;
+const { title, publisher, date, image, url } = Astro.props;
 ---
 
 <article class="book-preview">
     <h3 class="book-title">{title}</h3>
-    <p class="book-meta">{publisher}, {year}</p>
-    <p class="book-description">{description}</p>
+    <p class="book-meta">{publisher && `${publisher}, `}{date}</p>
 </article>
 
 <style>
@@ -37,10 +34,6 @@ const { title, publisher, year, description, image, linkUrl } = Astro.props;
 
     .book-meta {
         font-size: var(--fs-400);
-        margin: 0;
-    }
-
-    .book-description {
         margin: 0;
     }
 </style>
