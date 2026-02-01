@@ -1,6 +1,7 @@
 ---
 title: Current
-date: 2026-09-01
+date: "2026"
+publisher: Lily Poetry Review Books
 url: https://lilypoetryreview.blog/lily-poetry-review-press/current-by-babara-siegel-carlson/
 image:
   src: TODO
@@ -9,7 +10,7 @@ image:
 
 <!-- TODO: ask about how to use the two Betsy Sholl quotes -->
 
-The poems in Barbara Carlson’s Current take us under the surface into what lives below and just to the side of the material world. Her words do that miraculous thing of leading us to the edge of the unsayable, a “higher stillness” full of wonder. Carlson can move with the apparent ease of an aerialist from an abandoned nest, to a ruined mansion’s broken windows, to the centuries pressed into rock—each image becoming part of the next and enlarging the whole. This is a book of transformations—not loud splashy ones, but the deeper, more quiet ones that come out of silence and the astute attention that Simone Weil calls prayer, or Carlson herself calls the “windless unseen light that opens us within.” Whether on a Roman street or walking alongside a bog near her home, Carlson gives us a place “for the soul to lie down and be gathered.” In our way too transactional world, these poems are crucial, their currents carry us back to mystery, to the immensity of life, until “whatever it is that separates us fades away.”
+The poems in Barbara Carlson's Current take us under the surface into what lives below and just to the side of the material world. Her words do that miraculous thing of leading us to the edge of the unsayable, a "higher stillness" full of wonder. Carlson can move with the apparent ease of an aerialist from an abandoned nest, to a ruined mansion's broken windows, to the centuries pressed into rock—each image becoming part of the next and enlarging the whole. This is a book of transformations—not loud splashy ones, but the deeper, more quiet ones that come out of silence and the astute attention that Simone Weil calls prayer, or Carlson herself calls the "windless unseen light that opens us within." Whether on a Roman street or walking alongside a bog near her home, Carlson gives us a place "for the soul to lie down and be gathered." In our way too transactional world, these poems are crucial, their currents carry us back to mystery, to the immensity of life, until "whatever it is that separates us fades away."
 
 –Betsy Sholl author of As if a Song Could Save You
 
@@ -37,4 +38,4 @@ In Barbara Carlson's Current, "Each scrap reveals an unseen world," and only thi
 > and see the stars. I can almost
 > reach through the light
 > and dark particles that hold all I am
-> to know where I’m going.
+> to know where I'm going.

@@ -26,15 +26,16 @@ const poem = defineCollection({
     schema: z.object({
         title: z.string(),
         publication: z.string(),
-        year: z.number(),
+        year: z.number().optional(),
+        linkUrl: z.string().optional(), // for single poems or the main collection link
         poems: z
             .array(
                 z.object({
                     title: z.string(),
-                    linkUrl: z.string(),
+                    linkUrl: z.string().optional(),
                 }),
             )
-            .optional(), // if included, is a collection
+            .optional(), // if included, is a collection of multiple poems
     }),
 });
 
@@ -43,15 +44,15 @@ const translation = defineCollection({
     schema: z.object({
         title: z.string(),
         author: z.string(),
-        description: z.string(),
+        description: z.string().optional(),
         publication: z.string().optional(),
-        year: z.number(),
+        year: z.number().optional(),
         linkUrl: z.string().optional(),
         poems: z
             .array(
                 z.object({
                     title: z.string(),
-                    linkUrl: z.string(),
+                    linkUrl: z.string().optional(),
                 }),
             )
             .optional(), // if included, is a collection
@@ -83,7 +84,7 @@ const interview = defineCollection({
     loader: glob({ pattern: '**/*.md', base: 'src/content/interviews' }),
     schema: z.object({
         title: z.string(),
-        date: z.coerce.date(),
+        date: z.string(),
         description: z.string().optional(),
         linkUrl: z.string().optional(),
     }),
