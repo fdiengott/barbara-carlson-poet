@@ -1,9 +1,9 @@
 ---
-title: "Take Five: Prose Poems by 5 Poets"
+title: 'Take Five: Prose Poems by 5 Poets'
 publisher: Finishing Line Press
-date: "2020"
+date: '2020'
 image:
-  src: TODO
+  src: '../../assets/take-five-cover.jpg'
   alt: Take Five book cover
 url: https://www.finishinglinepress.com/product/take-five-prose-poems-by-5-poets-by-laura-baird-deborah-brown-barbara-siegel-carlson-richard-jackson-susan-thomas/
 ---

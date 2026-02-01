@@ -54,7 +54,7 @@
         --spacing-700: 7rem;
         --spacing-800: 10rem;
 
-        --full-page-width: min(100%, 50rem);
+        --full-page-width: min(100%, 70rem);
         --full-page-padding: 1rem;
 
         /*  TODO: update these to not rely on tailwind */

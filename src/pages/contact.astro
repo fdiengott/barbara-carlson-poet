@@ -10,7 +10,6 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     <section class="section pt-0">
         <div class="bg-image">
             <div class="text-wrapper">
-
                 <form action="/form-success/" method="post" name="contact-form">
                     <input type="hidden" name="form-name" value="contact-form" />
 
@@ -37,29 +36,6 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-    .bg-image {
-        --_padding: var(--spacing-400);
-        --_margin-inline: var(--spacing-400);
-
-        position: relative;
-
-        width: calc(100% + var(--_margin-inline) * 2);
-        min-height: 30rem;
-        margin-inline: calc(-1 * var(--_margin-inline));
-        padding-block: var(--_padding);
-
-        &::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: url('../assets/contact-page-background.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            filter: brightness(0.8);
-        }
-    }
-
     .text-wrapper {
         display: grid;
         gap: var(--spacing-300);

@@ -8,17 +8,18 @@ const hero = defineCollection({
 
 const book = defineCollection({
     loader: glob({ pattern: '**/*.md', base: 'src/content/books' }),
-    schema: z.object({
-        title: z.string(),
-        description: z.string().optional(),
-        publisher: z.string().optional(),
-        date: z.string().or(z.date()),
-        image: z.object({
-            src: z.string(),
-            alt: z.string(),
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            description: z.string().optional(),
+            publisher: z.string().optional(),
+            date: z.string().or(z.date()),
+            image: z.object({
+                src: image(),
+                alt: z.string(),
+            }),
+            url: z.string(),
         }),
-        url: z.string(),
-    }),
 });
 
 const poem = defineCollection({
@@ -84,7 +85,7 @@ const interview = defineCollection({
     loader: glob({ pattern: '**/*.md', base: 'src/content/interviews' }),
     schema: z.object({
         title: z.string(),
-        date: z.string(),
+        date: z.string().or(z.date()),
         description: z.string().optional(),
         linkUrl: z.string().optional(),
     }),

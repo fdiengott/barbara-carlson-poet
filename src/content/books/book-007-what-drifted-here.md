@@ -2,11 +2,11 @@
 title: What Drifted Here
 description: Collection of Poetry
 publisher: Cherry Grove Collections
-date: "2023"
+date: '2023'
 url: https://www.amazon.com/What-Drifted-Barbara-Siegel-Carlson/dp/1625494246/ref=sr_1_1?s=books&sr=1-1
 image:
-  src: /assets/images/hero.jpg
-  alt: Book 1
+  src: '../../assets/what-drifted-here-cover.webp'
+  alt: TODO
 ---
 
 What Drifted Here is a book of that dwells in the silent, often overlooked or seemingly ordinary places where the mysterious and miraculous abide, and where amidst love and grief, we draw ever closer to the heart of the spiritual. The poems, some in prose form and dramatic monologue, take dreamlike leaps into worlds both personal and historical, glimpsing through the cracks something we can never wholly know but which leaves us changed.

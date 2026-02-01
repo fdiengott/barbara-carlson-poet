@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BookPreview from '@/components/BookPreview.astro';
 import { removeTemplates } from '@/utils/data-utils';
 
@@ -10,23 +10,31 @@ const recentBooks = books.toSorted((a, b) => new Date(b.data.date).getTime() - n
 ---
 
 <section id="hero">
-    <div class="content-wrapper">
-        {
-            recentBooks.map((book) => (
-                <BookPreview title={book.data.title} publisher={book.data.publisher} date={book.data.date} image={book.data.image} url={book.data.url} />
-            ))
-        }
-    </div>
+    {
+        recentBooks.map(async (book, i) => {
+            const { Content } = await render(book);
+
+            return (
+                <BookPreview
+                    title={book.data.title}
+                    publisher={book.data.publisher}
+                    date={book.data.date}
+                    image={{
+                        ...book.data.image,
+                        direction: i % 2 === 0 ? 'left' : 'right',
+                    }}
+                    url={book.data.url}
+                >
+                    <Content />
+                </BookPreview>
+            );
+        })
+    }
 </section>
 
-<style is:global>
-    .content-wrapper {
+<style>
+    #hero {
         display: grid;
-        gap: var(--spacing-400);
-    }
-
-    .section-title {
-        font-style: italic;
-        margin: 0;
+        row-gap: var(--spacing-600);
     }
 </style>

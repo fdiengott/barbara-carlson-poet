@@ -1,9 +1,9 @@
 ---
 title: Once in Every Language
 publisher: Kelsay Books
-date: "2017"
+date: '2017'
 image:
-  src: /assets/images/once-in-every-language.jpg
+  src: '../../assets/once-in-every-language-cover.webp'
   alt: Once in Every Language book cover
 url: https://www.amazon.com/Every-Language-Barbara-Siegel-Carlson/dp/1945752785
 ---

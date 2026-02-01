@@ -4,7 +4,7 @@ description: An anthology of poems and interviews
 publisher: Bridges Press
 date: '2017'
 image:
-  src: /assets/images/a-bridge-of-voices.jpg
+  src: '../../assets/a-bridge-of-voices-cover.jpg'
   alt: A Bridge of Voices book cover
 url: https://www.amazon.com/Bridge-Voices-Contemporary-Slovene-Perspectives-ebook/dp/B077CB1LW7/
 ---

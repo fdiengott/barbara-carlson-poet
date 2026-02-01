@@ -1,9 +1,9 @@
 ---
 title: Fire Road
 publisher: Dream Horse Press
-date: "2013"
+date: '2013'
 image:
-  src: /assets/images/fire-road.jpg
+  src: '../../assets/fire-road-cover.jpg'
   alt: Fire Road book cover
 url: https://www.amazon.com/Fire-Road-Barbara-Siegel-Carlson/dp/1935716247
 ---

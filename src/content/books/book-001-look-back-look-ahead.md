@@ -1,9 +1,9 @@
 ---
-title: "Look Back, Look Ahead: The Selected Poems of Srečko Kosovel"
+title: 'Look Back, Look Ahead: The Selected Poems of Srečko Kosovel'
 publisher: Ugly Duckling Presse
-date: "2010"
+date: '2010'
 image:
-  src: /assets/images/look-back-look-ahead.jpg
+  src: '../../assets/look-ahead-cover.jpg'
   alt: Look Back, Look Ahead book cover
 url: https://www.amazon.com/Look-Back-Ahead-Srecko-Kosovel/dp/1933254548
 ---

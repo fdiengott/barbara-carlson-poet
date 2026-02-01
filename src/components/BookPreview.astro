@@ -1,29 +1,59 @@
 ---
+import { Image } from 'astro:assets';
+import ImageSider from './ImageSider.astro';
+
 // TODO: Flesh out styling and additional details as needed
 
 interface Props {
     title: string;
     publisher?: string;
-    date: string;
+    date: string | Date;
     image: {
         src: string;
         alt: string;
+        direction: 'left' | 'right';
     };
     url: string;
 }
 
 const { title, publisher, date, image, url } = Astro.props;
+
+const formatDate = (date: string | Date) => {
+    if (typeof date === 'string') return date;
+
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+};
 ---
 
 <article class="book-preview">
-    <h3 class="book-title">{title}</h3>
-    <p class="book-meta">{publisher && `${publisher}, `}{date}</p>
+    <a href={url} class:list={['book-link', { left: image.direction === 'left' }, { right: image.direction === 'right' }]} slot="image">
+        <Image src={image.src} alt={image.alt} width={400} height={600} class="book-image" />
+    </a>
+    <div slot="text">
+        <h3 class="book-title">{title}</h3>
+        <p class="book-meta">{publisher && `${publisher}, `}{formatDate(date)}</p>
+        <slot />
+    </div>
 </article>
 
 <style>
-    .book-preview {
-        display: grid;
-        gap: var(--spacing-100);
+    .book-link {
+        --_cover-padding: var(--spacing-400);
+    }
+
+    .book-link.left {
+        float: left;
+        padding-inline-end: var(--_cover-padding);
+        padding-block-end: var(--_cover-padding);
+    }
+    .book-link.right {
+        float: right;
+        padding-inline-start: var(--_cover-padding);
+        padding-block-end: var(--_cover-padding);
     }
 
     .book-title {
