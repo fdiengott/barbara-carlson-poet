@@ -15,7 +15,7 @@ const { title, description, image } = bio.data;
 <BaseLayout title={title} description={description}>
     <div class="about">
         <div class="image-wrapper">
-            {image && <Image src={image.src} alt={image.alt} width={750} height={750} {...optimizedImageProps} />}
+            {image && <Image src={image.src} alt={image.alt} width={400} height={530} {...optimizedImageProps} />}
             <p class="caption">Image by Lily Stone</p>
         </div>
         <slot />
@@ -30,5 +30,10 @@ const { title, description, image } = bio.data;
 
     .about p {
         margin-bottom: 1.5rem;
+    }
+
+    .about {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     }
 </style>
