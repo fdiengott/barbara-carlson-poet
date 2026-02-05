@@ -8,6 +8,10 @@ import ExternalLink from '@/components/ExternalLink.astro';
 import Pagination from '@/components/Pagination.astro';
 import siteConfig from '@/config/site-config';
 
+//  TODO:
+const events = await getCollection('event');
+const interviews = await getCollection('interview');
+
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
     const events = removeTemplates(await getCollection('event')).sort(sortByFileName);
 

@@ -15,3 +15,5 @@ export function slugify(input?: string) {
 
     return slug;
 }
+
+export const toTitleCase = (str: string) => str.trim().replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());

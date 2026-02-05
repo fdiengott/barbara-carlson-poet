@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import BookPreview from '@/components/BookPreview.astro';
+import Pill from '@/components/Pill.astro';
+import { slugify } from '@/utils/common-utils';
+
+const books = await getCollection('book');
+const translations = await getCollection('translation');
+const poems = await getCollection('poem');
+const essays = await getCollection('essay');
+
+const publicationTypes = ['Books', 'Translations', 'Poems', 'Essays'];
+---
+
+<BaseLayout title="Publications" description="Poems, translations, and other writings.">
+    <div class="title-wrapper">
+        <ul class="category-pill-list">
+            {
+                publicationTypes.map((type) => (
+                    <li>
+                        <Pill href={`#${type}`}>{type}</Pill>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+    <ul class="category-list">
+        <ul class="books-list">
+            {
+                books.map((book) => (
+                    <li class="book-list-item">
+                        <BookPreview {...book.data} slug={`/books/${slugify(book.data.title)}`} />
+                    </li>
+                ))
+            }
+        </ul>
+    </ul>
+</BaseLayout>
+
+<style>
+    .title-wrapper {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        column-gap: var(--spacing-400);
+        margin-block-end: var(--spacing-300);
+
+        h1 {
+            margin-block-end: 0;
+        }
+    }
+
+    .category-pill-list {
+        display: flex;
+        gap: var(--spacing-200);
+        flex-wrap: wrap;
+    }
+
+    .category-list {
+        display: grid;
+        gap: var(--spacing-500);
+    }
+
+    .category-title {
+        text-transform: capitalize;
+    }
+
+    .book-list-item {
+        margin-inline-start: var(--spacing-200);
+    }
+
+    .books-list {
+        display: grid;
+        gap: var(--spacing-300);
+    }
+
+    @media (min-width: 768px) {
+        .books-list {
+            gap: var(--spacing-500);
+        }
+    }
+</style>

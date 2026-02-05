@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,40 +9,42 @@
     /*  INFO: all colors are in HSL */
     :root {
         --black: hsl(0 0 9);
-        --white: hsl(50 19 94);
-        --bg-primary-light: hsl(50 19 94);
-        --bg-primary-dark: hsl(0 0 9);
+        --white: hsl(17 17 92);
+        /* hsl(5 30 92)*/
+        --bg-primary-light: var(--white);
+
+        --sage-green: hsl(90 24 71);
+        --sage-green-light: hsl(90 24 80);
+
+        --peach: hsl(7 36 74);
     }
 
     :root {
         --color-text-primary: var(--black);
         --color-text-secondary: hsl(50 19 94);
         --color-bg-primary: var(--bg-primary-light);
-        --color-bg-secondary: var(--bg-primary-dark);
         --color-bg-muted: hsl(53 18 90);
-        --color-border-primary: hsl(0 0 9);
-        --color-accent-primary: hsl(337 66 34);
-    }
-    html.dark {
-        --color-text-primary: var(--white);
-        --color-text-secondary: hsl(0 0 9);
-        --color-bg-primary: var(--bg-primary-dark);
-        --color-bg-secondary: var(--bg-primary-light);
-        --color-bg-muted: hsl(0 0 14);
-        --color-border-primary: hsl(50 19 94);
-        --color-accent-primary: hsl(44 40 69);
+        --color-border-primary: var(--black);
+
+        /* TODO: replace this with color defined above */
+        --color-accent-primary: hsl(148 37 23);
+        --color-accent-primary-light: hsl(from var(--color-accent-primary) h s 90%);
+
+        /*  TODO: try this with sage */
+        --color-accent-secondary: var(--peach);
+        --color-accent-secondary-light: hsl(from var(--color-accent-secondary) h s 90%);
     }
 
     :root {
-        --fs-200: clamp(0.7rem, calc(0.81rem + -0.13vw), 0.78rem);
-        --fs-300: clamp(0.94rem, calc(0.94rem + 0vw), 0.94rem);
-        --fs-400: clamp(1rem, calc(1rem + 0.12vw), 1.1rem);
-        --fs-500: clamp(1.13rem, calc(1.08rem + 0.22vw), 1.25rem);
-        --fs-600: clamp(1.35rem, calc(1.24rem + 0.55vw), 1.67rem);
-        --fs-700: clamp(1.62rem, calc(1.41rem + 1.05vw), 2.22rem);
-        --fs-800: clamp(1.94rem, calc(1.59rem + 1.77vw), 2.96rem);
-        --fs-900: clamp(2.33rem, calc(1.77rem + 2.81vw), 3.95rem);
-        --fs-1000: clamp(2.8rem, calc(1.94rem + 4.28vw), 5.26rem);
+        --fs-200: clamp(0.88rem, 0.8924rem + -0.016vw, 0.8889rem);
+        --fs-300: clamp(1rem, 0.9602rem + 0.1804vw, 1.1rem);
+        --fs-400: clamp(1.125rem, 1.0255rem + 0.451vw, 1.375rem);
+        --fs-500: clamp(1.2656rem, 1.0853rem + 0.8174vw, 1.7188rem);
+        --fs-600: clamp(1.4238rem, 1.1355rem + 1.3071vw, 2.1484rem);
+        --fs-700: clamp(1.6018rem, 1.1705rem + 1.9549vw, 2.6855rem);
+        --fs-800: clamp(1.802rem, 1.1832rem + 2.8048vw, 3.3569rem);
+        --fs-900: clamp(2.0273rem, 1.1641rem + 3.9123vw, 4.1962rem);
+        --fs-1000: clamp(2.2807rem, 1.1009rem + 5.3475vw, 5.2452rem);
 
         --spacing-050: 0.125rem;
         --spacing-100: 0.25rem;
@@ -57,54 +62,9 @@
         --full-page-width: min(100%, 70rem);
         --full-page-padding: 1rem;
 
-        /*  TODO: update these to not rely on tailwind */
-        --ff-serif: Newsreader, ui-serif, Georgia, serif;
-        --ff-sans: Inter, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    }
+        --ff-serif: 'EB Garamond', ui-serif, Georgia, serif;
 
-    body {
-        font-size: var(--fs-400);
-    }
-
-    a {
-        color: var(--color-accent-primary);
-        text-decoration: underline;
-
-        &:hover {
-            color: hsl(from var(--color-accent-primary) / 0.8);
-        }
-    }
-
-    h1 {
-        font-size: var(--fs-800);
-        font-weight: 800;
-    }
-
-    h2 {
-        font-size: var(--fs-700);
-        font-weight: 700;
-    }
-
-    h3 {
-        font-size: var(--fs-600);
-        font-weight: 600;
-    }
-
-    h4 {
-        font-size: var(--fs-500);
-        font-weight: 500;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4 {
-        line-height: 1.4;
-        margin-block-end: 0.5em;
-        text-wrap: balance;
-    }
-
-    html {
-        scroll-padding-block-start: calc(var(--floating-nav-height, 0) + var(--spacing-250));
+        /*  TODO: update to not rely on tailwind */
+        --ff-sans: Inter, ui-sans-serif, system-ui, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
     }
 }

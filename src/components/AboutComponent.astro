@@ -13,15 +13,22 @@ const { title, description, image } = bio.data;
 ---
 
 <BaseLayout title={title} description={description}>
-    <h1>{title}</h1>
     <div class="about">
-        {image && <Image src={image.src} alt={image.alt} width={750} height={750} {...optimizedImageProps} />}
+        <div class="image-wrapper">
+            {image && <Image src={image.src} alt={image.alt} width={750} height={750} {...optimizedImageProps} />}
+            <p class="caption">Image by Lily Stone</p>
+        </div>
         <slot />
     </div>
 </BaseLayout>
 
-<style is:global>
-    .about :is(p, img) {
+<style>
+    .image-wrapper {
+        display: grid;
+        place-items: center;
+    }
+
+    .about p {
         margin-bottom: 1.5rem;
     }
 </style>

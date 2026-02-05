@@ -1,50 +1,38 @@
 ---
-import type { Page } from 'astro';
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { removeTemplates } from '@/utils/data-utils';
-import Card from '@/components/Card.astro';
-import ExternalLink from '@/components/ExternalLink.astro';
-import Pagination from '@/components/Pagination.astro';
-import siteConfig from '@/config/site-config';
+import EventCard from '@/components/EventCard.astro';
 import { sortByFileName } from '@/utils/data-utils';
 
 const events = await getCollection('event');
-const cleanEvents = removeTemplates(events);
-const totalPages = Math.ceil(cleanEvents.length / (siteConfig?.eventsPerPage || 4));
+const cleanEvents = removeTemplates(events).toSorted(sortByFileName);
 
-const eventsOnFirstPage = cleanEvents.sort(sortByFileName).slice(0, siteConfig.eventsPerPage || 4);
-
-const page: Pick<Page, 'data' | 'url' | 'currentPage' | 'lastPage'> = {
-    data: eventsOnFirstPage,
-    url: {
-        prev: undefined,
-        next: '/events/2',
-        first: '/events/1',
-        last: `/events/${totalPages}`,
-        current: '/events/1',
-    },
-    currentPage: 1,
-    lastPage: totalPages,
-};
+const pastEvents = cleanEvents.filter(({ data: { date } }) => new Date(date).getTime() < Date.now());
+const upcomingEvents = cleanEvents.filter(({ data: { date } }) => new Date(date).getTime() > Date.now());
 ---
 
 <BaseLayout title="Events" description="Events">
-    <h1>Events</h1>
-    <ul>
-        {
-            eventsOnFirstPage.map((event) => (
-                <Card>
-                    <ExternalLink linkUrl={event.data.linkUrl} title={event.data.linkText} />
-                    <p>{event.data.publication}</p>
-                </Card>
-            ))
-        }
-    </ul>
-    <Pagination page={page} />
+    <div class="events-lists-wrapper">
+        <div>
+            <h2>Upcoming Events</h2>
+            {!upcomingEvents.length && <p>No upcoming events</p>}
+            <ul>{upcomingEvents.map((event) => <EventCard event={event} />)}</ul>
+        </div>
+        <div>
+            <h2>Past Events</h2>
+            <ul>
+                {pastEvents.map((event) => <EventCard event={event} />)}
+            </ul>
+        </div>
+    </div>
 </BaseLayout>
 
 <style>
+    .events-lists-wrapper {
+        display: grid;
+        gap: var(--spacing-200);
+    }
     ul {
         display: flex;
         flex-direction: column;

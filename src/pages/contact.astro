@@ -8,46 +8,50 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     </section>
 
     <section class="section pt-0">
-        <div class="bg-image">
-            <div class="text-wrapper">
-                <form action="/form-success/" method="post" name="contact-form">
-                    <input type="hidden" name="form-name" value="contact-form" />
+        <form action="/form-success/" method="post" name="contact-form">
+            <input type="hidden" name="form-name" value="contact-form" />
 
-                    <fieldset class="form-group">
-                        <input type="text" name="name" id="name-input" required placeholder=" " />
-                        <label for="name-input">Name</label>
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <input type="email" name="email" id="email-input" required placeholder=" " />
-                        <label for="email-input">Email</label>
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <textarea name="message" id="message-input" rows="8" required placeholder=" "></textarea>
-                        <label for="message-input">Message</label>
-                    </fieldset>
+            <fieldset class="form-group">
+                <label for="name-input">Name</label>
+                <input type="text" name="name" id="name-input" required placeholder=" " />
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="email-input">Email</label>
+                <input type="email" name="email" id="email-input" required placeholder=" " />
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="message-input">Message</label>
+                <textarea name="message" id="message-input" rows="8" required placeholder=" "></textarea>
+            </fieldset>
 
-                    <button class="submit" type="submit">
-                        <span>Submit</span>
-                    </button>
-                </form>
-            </div>
-        </div>
+            <button class="submit" type="submit">
+                <span>Submit</span>
+            </button>
+        </form>
     </section>
 </BaseLayout>
 
 <style>
-    .text-wrapper {
+    form {
         display: grid;
         gap: var(--spacing-300);
+        margin-inline: auto;
+        width: var(--full-page-width);
+    }
+
+    fieldset {
+        display: grid;
+    }
+
+    button[type='submit'] {
+        background: var(--color-accent-primary);
+        border: none;
+        border-radius: var(--spacing-150);
+        color: var(--color-bg-primary);
+        cursor: pointer;
+        padding: var(--spacing-150) var(--spacing-400);
+        text-align: center;
         width: fit-content;
-
-        background: hsl(0 50 100 / 0.5);
-        backdrop-filter: blur(0.2rem);
-        color: var(--black);
-        z-index: 1;
-
-        border-radius: var(--spacing-200);
-        padding: var(--spacing-400);
-        margin-inline: var(--spacing-200);
+        margin-inline: auto;
     }
 </style>
