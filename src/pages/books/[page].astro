@@ -1,0 +1,23 @@
+---
+import type { Page } from 'astro';
+import { CollectionEntry, getCollection, render } from 'astro:content';
+import BookPreview from '@/components/BookPreview.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { slugify } from '@/utils/common-utils';
+
+export async function getStaticPaths() {
+    const books = (await getCollection('book')) as CollectionEntry<'book'>[];
+
+    return books.map((book) => ({ params: { page: slugify(book.data.title) }, props: { book } }));
+}
+
+const { book } = Astro.props;
+const { title, date } = book.data;
+const { Content } = await render(book);
+---
+
+<BaseLayout title={title}>
+    <BookPreview title={title} date={date} image={{ ...book.data.image, direction: 'left' }} url={book.data.url}>
+        <Content />
+    </BookPreview>
+</BaseLayout>
