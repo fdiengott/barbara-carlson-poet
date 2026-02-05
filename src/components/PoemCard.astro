@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import Card from './Card.astro';
+
+interface Props {
+    poem: CollectionEntry<'poem'>;
+}
+
+const { poem } = Astro.props;
+const { title, publication, year, linkUrl, poems } = poem.data;
+---
+
+<Card>
+    <div class="poem-wrapper">
+        <div class="poem-meta">
+            <h4 class="poem-title">
+                {
+                    linkUrl ? (
+                        <a href={linkUrl} target="_blank" rel="noopener noreferrer">
+                            {title}
+                        </a>
+                    ) : (
+                        title
+                    )
+                }
+            </h4>
+            <p class="poem-details">
+                {[publication, year].filter(Boolean).join(', ')}
+            </p>
+        </div>
+        {
+            poems && poems.length > 0 && (
+                <ul class="poems-list">
+                    {poems.map((p) => (
+                        <li>
+                            {p.linkUrl ? (
+                                <a href={p.linkUrl} target="_blank" rel="noopener noreferrer">
+                                    {p.title}
+                                </a>
+                            ) : (
+                                p.title
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            )
+        }
+    </div>
+</Card>
+
+<style>
+    .poem-meta {
+        display: flex;
+        flex-direction: column;
+
+        h4 {
+            margin-block-end: 0;
+            line-height: 1.1;
+        }
+    }
+
+    .poems-list {
+        list-style: '–' inside;
+    }
+</style>

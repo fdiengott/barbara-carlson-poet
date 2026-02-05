@@ -1,13 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
-
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import BooksList from '@/components/BooksList.astro';
 import TranslationsList from '@/components/TranslationsList.astro';
+import PoemsList from '@/components/PoemsList.astro';
+import EssaysList from '@/components/EssaysList.astro';
 import Pill from '@/components/Pill.astro';
-
-const poems = await getCollection('poem');
-const essays = await getCollection('essay');
 
 const publicationTypes = ['Books', 'Translations', 'Poems', 'Essays'] as const;
 ---
@@ -27,6 +24,8 @@ const publicationTypes = ['Books', 'Translations', 'Poems', 'Essays'] as const;
     <ul class="category-list">
         <BooksList id={'Books' satisfies (typeof publicationTypes)[number]} />
         <TranslationsList id={'Translations' satisfies (typeof publicationTypes)[number]} />
+        <PoemsList id={'Poems' satisfies (typeof publicationTypes)[number]} />
+        <EssaysList id={'Essays' satisfies (typeof publicationTypes)[number]} />
     </ul>
 </BaseLayout>
 

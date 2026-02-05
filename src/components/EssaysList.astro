@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+import EssayCard from './EssayCard.astro';
+
+const essays = ((await getCollection('essay')) as CollectionEntry<'essay'>[])?.toSorted((a, b) => b.data.year - a.data.year);
+
+interface Props {
+    id: string;
+}
+const { id } = Astro.props;
+---
+
+<div>
+    <h2 class="category-title" id={id}>Essays</h2>
+    <ul class="essays-list">
+        {
+            essays.map((essay) => (
+                <li class="essay-list-item">
+                    <EssayCard essay={essay} />
+                </li>
+            ))
+        }
+    </ul>
+</div>
+
+<style>
+    .essays-list {
+        display: grid;
+        row-gap: var(--spacing-200);
+    }
+
+    @media (min-width: 768px) {
+        .essays-list {
+            row-gap: var(--spacing-300);
+        }
+    }
+</style>

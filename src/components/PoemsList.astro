@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+import PoemCard from './PoemCard.astro';
+
+const poems = ((await getCollection('poem')) as CollectionEntry<'poem'>[])?.toSorted((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
+
+interface Props {
+    id: string;
+}
+const { id } = Astro.props;
+---
+
+<div>
+    <h2 class="category-title" id={id}>Poems</h2>
+    <ul class="poems-list">
+        {
+            poems.map((poem) => (
+                <li class="poem-list-item">
+                    <PoemCard poem={poem} />
+                </li>
+            ))
+        }
+    </ul>
+</div>
+
+<style>
+    .poems-list {
+        display: grid;
+        row-gap: var(--spacing-200);
+    }
+
+    @media (min-width: 768px) {
+        .poems-list {
+            row-gap: var(--spacing-300);
+        }
+    }
+</style>

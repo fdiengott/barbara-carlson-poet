@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import Card from './Card.astro';
+
+interface Props {
+    essay: CollectionEntry<'essay'>;
+}
+
+const { essay } = Astro.props;
+const { title, publication, year, linkUrl } = essay.data;
+---
+
+<Card>
+    <div class="essay-wrapper">
+        <div class="essay-meta">
+            <h4 class="essay-title">
+                {
+                    linkUrl ? (
+                        <a href={linkUrl} target="_blank" rel="noopener noreferrer">
+                            {title}
+                        </a>
+                    ) : (
+                        title
+                    )
+                }
+            </h4>
+            <p class="essay-details">
+                {[publication, year].filter(Boolean).join(', ')}
+            </p>
+        </div>
+    </div>
+</Card>
+
+<style>
+    .essay-meta {
+        display: flex;
+        flex-direction: column;
+
+        h4 {
+            margin-block-end: 0;
+            line-height: 1.1;
+        }
+    }
+</style>

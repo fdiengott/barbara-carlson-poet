@@ -19,7 +19,7 @@ const { id } = Astro.props;
         {
             books.map((book) => (
                 <li class="book-list-item">
-                    <MiniBookPreview book={book} url={`/books/${slugify(book.data.title)}`} />
+                    <MiniBookPreview book={book} slug={`/books/${slugify(book.data.title)}`} />
                 </li>
             ))
         }
