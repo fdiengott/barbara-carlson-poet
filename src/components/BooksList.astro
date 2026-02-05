@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+import MiniBookPreview from './MiniBookPreview.astro';
+import { slugify } from '@/utils/common-utils';
+
+const books = ((await getCollection('book')) as CollectionEntry<'book'>[])?.toSorted((a, b) => b.id.localeCompare(a.id));
+
+interface Props {
+    id: string;
+}
+const { id } = Astro.props;
+---
+
+<div>
+    <h2 class="category-title" id={id}>Books</h2>
+    <ul class="books-list">
+        {
+            books.map((book) => (
+                <li class="book-list-item">
+                    <MiniBookPreview book={book} url={`/books/${slugify(book.data.title)}`} />
+                </li>
+            ))
+        }
+    </ul>
+</div>
+
+<style>
+    .books-list {
+        display: grid;
+        row-gap: var(--spacing-200);
+    }
+
+    @media (min-width: 768px) {
+        .books-list {
+            row-gap: var(--spacing-300);
+        }
+    }
+</style>

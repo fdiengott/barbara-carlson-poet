@@ -1,0 +1,70 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import Card from './Card.astro';
+
+interface Props {
+    book: CollectionEntry<'book'>;
+    slug: string;
+}
+
+const {
+    book: {
+        data: { image, title, date, publisher },
+    },
+    slug,
+} = Astro.props;
+---
+
+<Card>
+    <div class="book-wrapper">
+        <a href={slug} class="book-link">
+            <Image src={image.src} alt={image.alt} width={175} height={293} class="book-image" />
+        </a>
+        <div class="book-meta">
+            <h3 class="book-title">{title}</h3>
+            <p class="book-details">{publisher}, {date}</p>
+        </div>
+    </div>
+</Card>
+
+<style>
+    .book-wrapper {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: max-content auto;
+    }
+
+    .book-wrapper {
+        display: flex;
+        flex-direction: column;
+        row-gap: var(--spacing-250);
+
+        .book-link {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .book-meta {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-100);
+
+        h3 {
+            margin-block-end: 0;
+            line-height: 1.1;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .books-list {
+            row-gap: var(--spacing-300);
+        }
+        .book-wrapper {
+            display: grid;
+            grid-template-rows: 1fr;
+            column-gap: var(--spacing-250);
+        }
+    }
+</style>
