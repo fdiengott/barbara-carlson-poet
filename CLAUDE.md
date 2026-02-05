@@ -42,3 +42,15 @@ Content files are markdown stored in `src/content/{collection-name}/`.
 - This website was originally built with Tailwind CSS, but should primarily be styled with CSS and CSS variables from here on out.
 - Custom fonts: Inter (sans), Newsreader (serif)
 - Custom colors and spacing are defined in src/styles/global.css
+
+- custom properties available:
+
+  --color-text-primary, --color-text-secondary, --color-bg-primary, --color-bg-muted, --color-border-primary, --color-accent-primary, --color-accent-primary-light, --color-accent-secondary, --color-accent-secondary-light,
+
+  --fs-200, --fs-300, --fs-400, --fs-500, --fs-600, --fs-700, --fs-800, --fs-900, --fs-1000,
+
+  --spacing-050, --spacing-100, --spacing-150, --spacing-200, --spacing-250, --spacing-300, --spacing-400, --spacing-450, --spacing-500, --spacing-600, --spacing-700, --spacing-800,
+
+  --full-page-width, --full-page-padding
+
+  --ff-serif, --ff-sans
