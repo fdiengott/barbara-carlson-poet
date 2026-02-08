@@ -12,10 +12,13 @@
         /* hsl(5 30 92)*/
         --bg-primary-light: var(--white);
 
-        --sage-green: hsl(90 24 71);
-        --sage-green-light: hsl(90 24 80);
+        --sage-green: hsl(87, 35%, 71%);
+        --sage-green-light: hsl(from var(--sage-green) h s 80%);
+        --sage-green-dark: hsl(from var(--sage-green) h s 25%);
 
         --peach: hsl(7 36 74);
+
+        --tan: hsl(52.05 29 54);
     }
 
     :root {
@@ -25,13 +28,11 @@
         --color-bg-muted: hsl(53 18 90);
         --color-border-primary: var(--black);
 
-        /* TODO: replace this with color defined above */
-        --color-accent-primary: hsl(148 37 23);
-        --color-accent-primary-light: hsl(from var(--color-accent-primary) h s 90%);
+        --color-accent-primary: var(--sage-green-dark);
+        --color-accent-primary-light: var(--color-accent-primary);
 
-        /*  TODO: try this with sage */
-        --color-accent-secondary: var(--peach);
-        --color-accent-secondary-light: hsl(from var(--color-accent-secondary) h s 90%);
+        --color-accent-secondary: var(--tan);
+        --color-accent-secondary-light: hsl(from var(--tan) h s 83%);
     }
 
     :root {
