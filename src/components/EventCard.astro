@@ -2,7 +2,7 @@
 import Card from './Card.astro';
 import ExternalLink from './ExternalLink.astro';
 import type { CollectionEntry } from 'astro:content';
-import { toTitleCase } from '@/utils/common-utils';
+import { toTitleCase, formatDate } from '@/utils/common-utils';
 
 interface Props {
     event: CollectionEntry<'event'>;
@@ -13,30 +13,25 @@ const {
         data: { title, date, time, linkUrl, description, eventType, address },
     },
 } = Astro.props;
-
-const formatter = Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    weekday: 'short',
-});
 ---
 
-<Card>
-    <div class="event-details-wrapper">
-        <div class="event-link-wrapper">
-            <ExternalLink linkUrl={linkUrl} title={title} />
+<li>
+    <Card>
+        <div class="event-details-wrapper">
+            <div class="event-link-wrapper">
+                <ExternalLink linkUrl={linkUrl} title={title} />
 
-            {eventType && <p>{toTitleCase(eventType)}</p>}
+                {eventType && <p>{toTitleCase(eventType)}</p>}
+            </div>
+            <p>
+                {formatDate(date)}
+                {time && `at ${time}`}
+            </p>
+            {address && <p>{address}</p>}
         </div>
-        <p>
-            {formatter.format(date)}
-            {time && `at ${time}`}
-        </p>
-        {address && <p>{address}</p>}
-    </div>
-    {description && <p class="description">{description}</p>}
-</Card>
+        {description && <p class="description">{description}</p>}
+    </Card>
+</li>
 
 <style>
     .event-link-wrapper {

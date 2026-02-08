@@ -1,15 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { removeTemplates } from '@/utils/data-utils';
 import EventCard from '@/components/EventCard.astro';
 import { sortByFileName } from '@/utils/data-utils';
 
 const events = await getCollection('event');
-const cleanEvents = removeTemplates(events).toSorted(sortByFileName);
+const sortedEvents = events.toSorted(sortByFileName);
 
-const pastEvents = cleanEvents.filter(({ data: { date } }) => new Date(date).getTime() < Date.now());
-const upcomingEvents = cleanEvents.filter(({ data: { date } }) => new Date(date).getTime() > Date.now());
+const pastEvents = sortedEvents.filter(({ data: { date } }) => new Date(date).getTime() < Date.now());
+const upcomingEvents = sortedEvents.filter(({ data: { date } }) => new Date(date).getTime() > Date.now());
 ---
 
 <BaseLayout title="Events" description="Events">
@@ -31,11 +30,11 @@ const upcomingEvents = cleanEvents.filter(({ data: { date } }) => new Date(date)
 <style>
     .events-lists-wrapper {
         display: grid;
-        gap: var(--spacing-200);
+        gap: var(--spacing-400);
     }
     ul {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: var(--spacing-250);
     }
 </style>
