@@ -1,0 +1,26 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PressList from '@/components/PressList.astro';
+import InterviewsList from '@/components/InterviewsList.astro';
+---
+
+<BaseLayout title="News" description="News and interviews">
+    <div class="news-wrapper">
+        <section class="press-section">
+            <h2>Press</h2>
+            <PressList />
+        </section>
+
+        <section class="interviews-section">
+            <h2>Interviews</h2>
+            <InterviewsList />
+        </section>
+    </div>
+</BaseLayout>
+
+<style>
+    .news-wrapper {
+        display: grid;
+        gap: var(--spacing-400);
+    }
+</style>

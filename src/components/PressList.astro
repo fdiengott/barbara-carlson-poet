@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import Card from './Card.astro';
+import { sortByFileName } from '@/utils/data-utils';
+import { formatDate } from '@/utils/common-utils';
+import ExternalLink from './ExternalLink.astro';
+
+const press = await getCollection('press');
+const sortedPress = press.toSorted(sortByFileName);
+---
+
+<ul class="press-list">
+    {
+        sortedPress.map(({ data }) => (
+            <li class="press-card">
+                <Card>
+                    <div class="press-body">
+                        <div>{data.linkUrl ? <ExternalLink linkUrl={data.linkUrl} title={data.title} /> : data.title}</div>
+                        <time datetime={data.date.toISOString()}>{formatDate(data.date)}</time>
+                    </div>
+                </Card>
+            </li>
+        ))
+    }
+</ul>
+
+<style>
+    .press-list {
+        display: grid;
+        gap: var(--spacing-250);
+    }
+
+    .press-body {
+        display: grid;
+        gap: 0;
+    }
+
+    .press-card h3 {
+        margin: 0;
+    }
+
+    .press-card time {
+        font-size: var(--fs-300);
+    }
+</style>

@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Card from './Card.astro';
+import { sortByFileName } from '@/utils/data-utils';
+import { formatDate } from '@/utils/common-utils';
+import ExternalLink from './ExternalLink.astro';
+
+const interviews = await getCollection('interview');
+const sortedInterviews = interviews.toSorted(sortByFileName);
+
+const formatDateIfCoerceable = (date: Date | string) => (typeof date === 'string' ? date : formatDate(date));
+---
+
+<ul class="interviews-list">
+    {
+        sortedInterviews.map(({ data }) => (
+            <li class="interview-card">
+                <Card>
+                    <div class="interview-body">
+                        <div>
+                            <div>{data.linkUrl ? <ExternalLink linkUrl={data.linkUrl} title={data.title} /> : data.title}</div>
+                            <div class="date">{formatDateIfCoerceable(data.date)}</div>
+                        </div>
+                        {data.description && <p>{data.description}</p>}
+                    </div>
+                </Card>
+            </li>
+        ))
+    }
+</ul>
+
+<style>
+    .interviews-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-200);
+    }
+
+    .interview-body {
+        display: grid;
+        gap: var(--spacing-200);
+    }
+
+    .interview-card .date {
+        font-size: var(--fs-300);
+    }
+</style>

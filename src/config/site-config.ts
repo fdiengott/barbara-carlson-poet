@@ -45,6 +45,10 @@ const siteConfig: SiteConfig = {
             href: '/events',
         },
         {
+            text: 'News',
+            href: '/news',
+        },
+        {
             text: 'Contact',
             href: '/contact',
         },
