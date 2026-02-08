@@ -29,16 +29,29 @@ In Barbara Carlson's Current, "Each scrap reveals an unseen world," and only thi
 > BLESSING A STONE
 >
 > Stones along the dirt road shine
+>
 > in quiet hues at dawn.
+>
 > Their colors deepen
+>
 > as the smell of light
+>
 > revives on the moist road.
+>
 > I pick one up and rub
+>
 > the striations, as if I could draw
+>
 > from the lines some message,
+>
 > some memory of its passage.
+>
 > Pausing, I close my eyes
+>
 > and see the stars. I can almost
+>
 > reach through the light
+>
 > and dark particles that hold all I am
+>
 > to know where I'm going.

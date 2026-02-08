@@ -56,9 +56,15 @@ main {
 }
 
 blockquote {
+    font-family: var(--ff-mono);
+
     margin-block: var(--spacing-100) var(--spacing-300);
     padding-inline-start: var(--spacing-250);
     padding-block: var(--spacing-300);
     border-inline-start: 5px solid var(--color-accent-secondary);
     background-color: var(--color-accent-secondary-light);
+
+    & > p:first-of-type {
+        margin-block-end: var(--spacing-300);
+    }
 }
