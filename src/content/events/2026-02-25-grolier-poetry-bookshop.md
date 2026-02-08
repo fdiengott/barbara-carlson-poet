@@ -1,6 +1,6 @@
 ---
 title: Grolier Poetry Bookshop
-date: 2025-02-25
+date: 2026-02-25
 time: 7 pm
 address: 7 Plympton St, Cambridge, MA
 eventType: reading
