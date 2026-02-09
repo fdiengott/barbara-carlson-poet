@@ -1,14 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import EventCard from '@/components/EventCard.astro';
-import { sortByFileName } from '@/utils/data-utils';
 
-const events = await getCollection('event');
-const sortedEvents = events.toSorted(sortByFileName);
+const events = (await getCollection('event')) as CollectionEntry<'event'>[];
 
-const pastEvents = sortedEvents.filter(({ data: { date } }) => new Date(date).getTime() < Date.now());
-const upcomingEvents = sortedEvents.filter(({ data: { date } }) => new Date(date).getTime() > Date.now());
+const toTime = ({ data }: CollectionEntry<'event'>) => data.date.getTime();
+const pastEvents = events.toSorted((a, b) => toTime(a) - toTime(b)).filter(({ data: { date } }) => new Date(date).getTime() < Date.now());
+const upcomingEvents = events.toSorted((a, b) => toTime(b) - toTime(a)).filter(({ data: { date } }) => new Date(date).getTime() > Date.now());
 ---
 
 <BaseLayout title="Events" description="Events">
