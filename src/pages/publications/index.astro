@@ -6,16 +6,26 @@ import PoemsList from '@/components/PoemsList.astro';
 import EssaysList from '@/components/EssaysList.astro';
 import CategoryNav from '@/components/CategoryNav.astro';
 
-const publicationTypes = ['Books', 'Translations', 'Poems', 'Essays'] as const;
+const publicationTypes = ['Books', 'Poems', 'Translations', 'Essays'] as const;
+type Publication = (typeof publicationTypes)[number];
+
+const publications: Record<Publication, typeof BooksList> = {
+    Books: BooksList,
+    Poems: PoemsList,
+    Translations: TranslationsList,
+    Essays: EssaysList,
+};
 ---
 
 <BaseLayout title="Publications" description="Poems, translations, and other writings.">
     <CategoryNav categories={publicationTypes} />
     <ul class="category-list">
-        <BooksList id={'Books' satisfies (typeof publicationTypes)[number]} />
-        <TranslationsList id={'Translations' satisfies (typeof publicationTypes)[number]} />
-        <PoemsList id={'Poems' satisfies (typeof publicationTypes)[number]} />
-        <EssaysList id={'Essays' satisfies (typeof publicationTypes)[number]} />
+        {
+            publicationTypes.map((type) => {
+                const Component = publications[type];
+                return <Component id={type} />;
+            })
+        }
     </ul>
 </BaseLayout>
 
