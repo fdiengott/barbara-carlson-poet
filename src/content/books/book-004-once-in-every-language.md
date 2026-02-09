@@ -1,7 +1,7 @@
 ---
 title: Once in Every Language
 publisher: Kelsay Books
-date: '2017'
+year: 2017
 image:
   src: '../../assets/once-in-every-language-cover.webp'
   alt: Once in Every Language book cover

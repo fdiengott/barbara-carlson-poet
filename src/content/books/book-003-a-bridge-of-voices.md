@@ -2,7 +2,7 @@
 title: 'A Bridge of Voices: Contemporary Slovene Poetry and Perspectives'
 description: An anthology of poems and interviews
 publisher: Bridges Press
-date: '2017'
+year: 2017
 image:
   src: '../../assets/a-bridge-of-voices-cover.jpg'
   alt: A Bridge of Voices book cover

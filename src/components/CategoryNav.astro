@@ -1,0 +1,174 @@
+---
+import Pill from '@/components/Pill.astro';
+import Tooltip from '@/components/Tooltip.astro';
+
+interface Props {
+    categories: readonly string[];
+}
+
+const { categories } = Astro.props;
+---
+
+<div class="category-nav-wrapper">
+    <ul class="category-pill-list">
+        {
+            categories.map((type) => (
+                <li>
+                    <Pill href={`#${type}`}>{type}</Pill>
+                </li>
+            ))
+        }
+    </ul>
+    <ul class="floating-category-pill-list">
+        {
+            categories.map((type) => (
+                <li>
+                    <a href={`#${type}`}>
+                        <Tooltip text={type} position="right">
+                            <div class="dash-wrapper" data-type={type}>
+                                <div class="dash" />
+                            </div>
+                        </Tooltip>
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</div>
+
+<style>
+    .category-nav-wrapper {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        column-gap: var(--spacing-400);
+        margin-block: calc(var(--spacing-100) * -1) var(--spacing-200);
+    }
+
+    .category-pill-list {
+        display: flex;
+        gap: var(--spacing-200);
+        flex-wrap: wrap;
+    }
+
+    .floating-category-pill-list {
+        --transition-details: 0.2s ease-in-out;
+
+        position: fixed;
+        left: var(--spacing-100);
+        top: calc(var(--floating-nav-height) + var(--spacing-200));
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-100);
+        opacity: 0;
+        transition: opacity var(--transition-details);
+        pointer-events: none;
+
+        li {
+            line-height: 1;
+        }
+
+        &.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    .dash-wrapper {
+        padding-block: var(--spacing-100);
+        color: hsl(from var(--color-text-primary) h s calc(l + 50));
+        transition:
+            color var(--transition-details),
+            transform var(--transition-details);
+
+        &:is(:hover, :focus-within, .selected) {
+            color: var(--color-text-primary);
+            transform: scaleX(1.2);
+        }
+    }
+
+    .dash {
+        width: 1rem;
+        height: 2px;
+        background-color: currentColor;
+    }
+
+    @container style(--inline-size-s: var(--breakpoint-sm)) {
+        .floating-category-pill-list {
+            left: var(--spacing-200);
+        }
+    }
+</style>
+
+<script>
+    const classes = document.querySelector('.category-nav-wrapper').dataset.classes;
+
+    const pillList = document.querySelector('.category-pill-list');
+    const floatingList = document.querySelector('.floating-category-pill-list');
+
+    if (pillList && floatingList) {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        floatingList.classList.remove('visible');
+                        return;
+                    }
+
+                    floatingList.classList.add('visible');
+                });
+            },
+            { threshold: 0 },
+        );
+
+        observer.observe(pillList);
+    }
+</script>
+
+<script>
+    const headers = document.querySelectorAll('h2');
+    const links = document.querySelectorAll('.floating-category-pill-list .dash-wrapper');
+    const linksArray = Array.from(links);
+    const headersArray = Array.from(headers);
+
+    const MARGIN = 600;
+
+    if (headersArray.length && linksArray.length) {
+        const headersPastTop = new Set<string>();
+
+        const updateActiveLink = () => {
+            let activeIndex = 0;
+            headersArray.forEach((header, index) => {
+                if (headersPastTop.has(header.id)) {
+                    activeIndex = index;
+                }
+            });
+
+            linksArray.forEach((link, index) => {
+                link.classList.toggle('selected', index === activeIndex);
+            });
+        };
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    const id = entry.target.id;
+                    if (!entry.isIntersecting && entry.boundingClientRect.top < MARGIN) {
+                        headersPastTop.add(id);
+                    } else {
+                        headersPastTop.delete(id);
+                    }
+                });
+                updateActiveLink();
+            },
+            {
+                threshold: 0,
+                rootMargin: `-${MARGIN}px 0px 0px 0px`,
+            },
+        );
+
+        headersArray.forEach((header) => observer.observe(header));
+        updateActiveLink();
+    }
+</script>

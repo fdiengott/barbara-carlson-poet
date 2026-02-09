@@ -2,7 +2,7 @@
 title: What Drifted Here
 description: Collection of Poetry
 publisher: Cherry Grove Collections
-date: '2023'
+year: 2023
 url: https://www.amazon.com/What-Drifted-Barbara-Siegel-Carlson/dp/1625494246/ref=sr_1_1?s=books&sr=1-1
 image:
   src: '../../assets/what-drifted-here-cover.webp'

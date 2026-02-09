@@ -1,15 +1,36 @@
 ---
-// const { href, ariaLabel, icon: Icon } = Astro.props;
-const { href, ariaLabel } = Astro.props;
+interface Props {
+    href?: string;
+    ariaLabel: string;
+    icon: IconName;
+}
+
+const { href, ariaLabel, icon } = Astro.props;
+
+const icons = {
+    facebook:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256c0 120.5 83.4 221.6 195.6 248.8V334.2h-59V256h59v-59.5c0-58.3 34.7-90.5 87.9-90.5 25.4 0 52 4.5 52 4.5v57.2h-29.3c-28.9 0-37.9 17.9-37.9 36.3V256h64.5l-10.3 78.2h-54.2v170.6C428.6 477.6 512 376.5 512 256z"/></svg>',
+} as const;
+
+type IconName = keyof typeof icons;
 ---
 
 {
     href && (
-        <li class="inline-block">
+        <li>
             <a aria-label={ariaLabel} href={href} target="_blank" rel="noopener noreferrer nofollow">
-                {/*  TODO:  */}
-                {/* <Icon size="1.2rem" /> */}
+                <span class="icon" set:html={icons[icon]} />
             </a>
         </li>
     )
 }
+
+<style>
+    .icon {
+        width: 1.2rem;
+        aspect-ratio: 1;
+        display: inline-flex;
+
+        color: var(--color-accent-primary);
+    }
+</style>

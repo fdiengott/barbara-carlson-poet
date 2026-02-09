@@ -1,6 +1,6 @@
 ---
 title: Current
-date: '2026'
+year: 2026
 publisher: Lily Poetry Review Books
 url: https://lilypoetryreview.blog/lily-poetry-review-press/current-by-babara-siegel-carlson/
 image:

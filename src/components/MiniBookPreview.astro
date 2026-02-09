@@ -10,7 +10,7 @@ interface Props {
 
 const {
     book: {
-        data: { image, title, date, publisher },
+        data: { image, title, year, publisher },
     },
     slug,
 } = Astro.props;
@@ -23,7 +23,7 @@ const {
         </a>
         <div class="book-meta">
             <h3 class="book-title">{title}</h3>
-            <p class="book-details">{publisher}, {date}</p>
+            <p class="book-details">{publisher}, {year}</p>
         </div>
     </div>
 </Card>
@@ -57,7 +57,7 @@ const {
         }
     }
 
-    @media (min-width: 768px) {
+    @container style(--inline-size-s: var(--breakpoint-sm)) {
         .books-list {
             row-gap: var(--spacing-300);
         }

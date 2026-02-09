@@ -1,7 +1,7 @@
 ---
 title: 'Take Five: Prose Poems by 5 Poets'
 publisher: Finishing Line Press
-date: '2020'
+year: 2020
 image:
   src: '../../assets/take-five-cover.jpg'
   alt: Take Five book cover

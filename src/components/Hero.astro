@@ -1,12 +1,9 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BookPreview from '@/components/BookPreview.astro';
-import { removeTemplates } from '@/utils/data-utils';
 
-// Get two most recent books
-const rawBooks = await getCollection('book');
-const books = removeTemplates(rawBooks);
-const recentBooks = books.toSorted((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()).slice(0, 2);
+const books = await getCollection('book');
+const recentBooks = books.toSorted((a, b) => b.data.year - a.data.year).slice(0, 2);
 ---
 
 <section id="hero">
@@ -15,16 +12,7 @@ const recentBooks = books.toSorted((a, b) => new Date(b.data.date).getTime() - n
             const { Content } = await render(book);
 
             return (
-                <BookPreview
-                    title={book.data.title}
-                    publisher={book.data.publisher}
-                    date={book.data.date}
-                    image={{
-                        ...book.data.image,
-                        direction: i % 2 === 0 ? 'left' : 'right',
-                    }}
-                    url={book.data.url}
-                >
+                <BookPreview book={book} imageDirection={i % 2 === 0 ? 'left' : 'right'}>
                     <Content />
                 </BookPreview>
             );

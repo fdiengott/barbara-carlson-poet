@@ -13,7 +13,7 @@ const book = defineCollection({
             title: z.string(),
             description: z.string().optional(),
             publisher: z.string().optional(),
-            date: z.string().or(z.date()),
+            year: z.number(),
             image: z.object({
                 src: image(),
                 alt: z.string(),

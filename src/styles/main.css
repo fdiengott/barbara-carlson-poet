@@ -44,6 +44,7 @@ h4 {
 
 html {
     scroll-padding-block-start: calc(var(--floating-nav-height, 0) + var(--spacing-250));
+    scroll-behavior: smooth;
 }
 
 main {

@@ -1,7 +1,7 @@
 ---
 title: Fire Road
 publisher: Dream Horse Press
-date: '2013'
+year: 2013
 image:
   src: '../../assets/fire-road-cover.jpg'
   alt: Fire Road book cover

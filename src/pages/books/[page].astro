@@ -1,6 +1,7 @@
 ---
 import type { Page } from 'astro';
-import { CollectionEntry, getCollection, render } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import BookPreview from '@/components/BookPreview.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { slugify } from '@/utils/common-utils';
@@ -12,12 +13,12 @@ export async function getStaticPaths() {
 }
 
 const { book } = Astro.props;
-const { title, date } = book.data;
+const { title } = book.data;
 const { Content } = await render(book);
 ---
 
 <BaseLayout title={title}>
-    <BookPreview title={title} date={date} image={{ ...book.data.image, direction: 'left' }} url={book.data.url}>
+    <BookPreview imageDirection="left" book={book}>
         <Content />
     </BookPreview>
 </BaseLayout>

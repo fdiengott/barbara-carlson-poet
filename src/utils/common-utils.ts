@@ -18,11 +18,16 @@ export function slugify(input?: string) {
 
 export const toTitleCase = (str: string) => str.trim().replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
 
-const formatter = Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    weekday: 'short',
-});
+export const formatDate = (date: string | Date, options?: Intl.DateTimeFormatOptions) => {
+    if (typeof date === 'string') return date;
 
-export const formatDate = (date: Date) => formatter.format(date);
+    const formatter = Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        weekday: 'short',
+        ...options,
+    });
+
+    return formatter.format(date);
+};

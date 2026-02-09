@@ -2,25 +2,34 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PressList from '@/components/PressList.astro';
 import InterviewsList from '@/components/InterviewsList.astro';
+import CategoryNav from '@/components/CategoryNav.astro';
+
+const newsTypes = ['Press', 'Interviews'] as const;
 ---
 
 <BaseLayout title="News" description="News and interviews">
-    <div class="news-wrapper">
-        <section class="press-section">
-            <h2>Press</h2>
+    <CategoryNav categories={newsTypes} />
+    <ul class="category-list">
+        <li>
+            <h2 id="Press">Press</h2>
             <PressList />
-        </section>
-
-        <section class="interviews-section">
-            <h2>Interviews</h2>
+        </li>
+        <li>
+            <h2 id="Interviews">Interviews</h2>
             <InterviewsList />
-        </section>
-    </div>
+        </li>
+    </ul>
 </BaseLayout>
 
 <style>
-    .news-wrapper {
+    .category-pill-list {
+        display: flex;
+        gap: var(--spacing-200);
+        flex-wrap: wrap;
+    }
+
+    .category-list {
         display: grid;
-        gap: var(--spacing-400);
+        gap: var(--spacing-500);
     }
 </style>

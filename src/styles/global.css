@@ -39,12 +39,10 @@
         --fs-200: clamp(0.88rem, 0.8924rem + -0.016vw, 0.8889rem);
         --fs-300: clamp(1rem, 0.9602rem + 0.1804vw, 1.1rem);
         --fs-400: clamp(1.125rem, 1.0255rem + 0.451vw, 1.375rem);
-        --fs-500: clamp(1.2656rem, 1.0853rem + 0.8174vw, 1.7188rem);
+        --fs-500: clamp(1.46rem, 1.0853rem + 0.8174vw, 1.7188rem);
         --fs-600: clamp(1.4238rem, 1.1355rem + 1.3071vw, 2.1484rem);
         --fs-700: clamp(1.6018rem, 1.1705rem + 1.9549vw, 2.6855rem);
         --fs-800: clamp(1.802rem, 1.1832rem + 2.8048vw, 3.3569rem);
-        --fs-900: clamp(2.0273rem, 1.1641rem + 3.9123vw, 4.1962rem);
-        --fs-1000: clamp(2.2807rem, 1.1009rem + 5.3475vw, 5.2452rem);
 
         --spacing-050: 0.125rem;
         --spacing-100: 0.25rem;
@@ -67,5 +65,16 @@
         /*  TODO: update to not rely on tailwind */
         --ff-sans: Inter, ui-sans-serif, system-ui, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
         --ff-mono: 'Cutive Mono', monospace;
+    }
+
+    @property --inline-size-s {
+        syntax: '<length>';
+        inherits: true;
+        initial-value: 100vw;
+    }
+
+    :root {
+        --breakpoint-sm: 768px;
+        --inline-size-s: min(var(--breakpoint-sm), 100vw);
     }
 }

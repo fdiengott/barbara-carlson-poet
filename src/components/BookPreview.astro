@@ -1,36 +1,23 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
-import Card from './Card.astro';
-import ExternalLink from './ExternalLink.astro';
-
-// TODO: Flesh out styling and additional details as needed
+import { slugify } from '@/utils/common-utils';
 
 interface Props {
-    title: string;
-    publisher?: string;
-    date: string | Date;
-    image: CollectionEntry<'book'>['data']['image'] & {
-        direction: 'left' | 'right';
-    };
-    url: string;
+    book: CollectionEntry<'book'>;
+    imageDirection: 'left' | 'right';
 }
 
-const { title, publisher, date, image, url } = Astro.props;
-
-const formatDate = (date: string | Date) => {
-    if (typeof date === 'string') return date;
-
-    return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    });
-};
+const {
+    book: {
+        data: { title, publisher, year, image, url },
+    },
+    imageDirection = 'left',
+} = Astro.props;
 ---
 
 <article class="book-preview">
-    <a href={url} class:list={['book-link', { left: image.direction === 'left' }, { right: image.direction === 'right' }]} slot="image">
+    <a href={`books/${slugify(title)}`} class:list={['book-link', { left: imageDirection === 'left' }, { right: imageDirection === 'right' }]} slot="image">
         <Image src={image.src} alt={image.alt} width={300} height={439} class="book-image" />
     </a>
     <div slot="text">
@@ -38,25 +25,34 @@ const formatDate = (date: string | Date) => {
             <h3 class="book-title">{title}</h3>
             <span class="purchase-link"><a href={url}>Purchase</a></span>
         </span>
-        <p class="book-meta">{publisher && `${publisher}, `}{formatDate(date)}</p>
+        <p class="book-meta">{publisher && `${publisher}, `}{year}</p>
         <slot />
     </div>
 </article>
 
 <style>
     .book-link {
-        --_cover-padding: var(--spacing-400);
+        display: grid;
+        justify-content: center;
+        margin-block-end: var(--spacing-200);
     }
 
-    .book-link.left {
-        float: left;
-        padding-inline-end: var(--_cover-padding);
-        padding-block-end: var(--_cover-padding);
-    }
-    .book-link.right {
-        float: right;
-        padding-inline-start: var(--_cover-padding);
-        padding-block-end: var(--_cover-padding);
+    @container style(--inline-size-s: var(--breakpoint-sm)) {
+        .book-link {
+            --_cover-padding: var(--spacing-400);
+            margin-block-end: 0;
+        }
+
+        .book-link.left {
+            float: left;
+            padding-inline-end: var(--_cover-padding);
+            padding-block-end: var(--_cover-padding);
+        }
+        .book-link.right {
+            float: right;
+            padding-inline-start: var(--_cover-padding);
+            padding-block-end: var(--_cover-padding);
+        }
     }
 
     .book-title {

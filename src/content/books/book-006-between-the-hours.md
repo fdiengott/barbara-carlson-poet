@@ -1,7 +1,7 @@
 ---
 title: Between the Hours
 publisher: Finishing Line Press
-date: '2022'
+year: 2022
 image:
   src: '../../assets/between-the-hours-cover.webp'
   alt: Between the Hours book cover
