@@ -1,15 +1,15 @@
-export type Image = {
+type Image = {
     src: string;
     alt?: string;
     caption?: string;
 };
 
-export type Link = {
+type Link = {
     text: string;
     href: string;
 };
 
-export type SiteConfig = {
+type SiteConfig = {
     logo?: Image;
     title: string;
     subtitle?: string;
