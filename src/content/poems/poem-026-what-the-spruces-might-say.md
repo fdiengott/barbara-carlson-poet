@@ -1,7 +1,6 @@
 ---
 title: "Five Poems"
 publication: "Cutthroat 21"
-linkUrl: "http://www.cutthroatmag.com/"
 poems:
   - title: "What the Spruces Might Say"
   - title: "A Little History"
