@@ -7,8 +7,8 @@ import EventCard from '@/components/EventCard.astro';
 const events = (await getCollection('event')) as CollectionEntry<'event'>[];
 
 const toTime = ({ data }: CollectionEntry<'event'>) => data.date.getTime();
-const pastEvents = events.toSorted((a, b) => toTime(a) - toTime(b)).filter(({ data: { date } }) => new Date(date).getTime() < Date.now());
-const upcomingEvents = events.toSorted((a, b) => toTime(b) - toTime(a)).filter(({ data: { date } }) => new Date(date).getTime() > Date.now());
+const pastEvents = events.toSorted((a, b) => toTime(b) - toTime(a)).filter(({ data: { date } }) => new Date(date).getTime() < Date.now());
+const upcomingEvents = events.toSorted((a, b) => toTime(a) - toTime(b)).filter(({ data: { date } }) => new Date(date).getTime() > Date.now());
 ---
 
 <BaseLayout title="Events" description="Events">
