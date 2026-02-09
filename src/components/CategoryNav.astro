@@ -42,7 +42,7 @@ const { categories } = Astro.props;
         align-items: center;
         flex-wrap: wrap;
         column-gap: var(--spacing-400);
-        margin-block: calc(var(--spacing-100) * -1) var(--spacing-200);
+        margin-block-end: var(--spacing-200);
     }
 
     .category-pill-list {
@@ -94,81 +94,83 @@ const { categories } = Astro.props;
         background-color: currentColor;
     }
 
-    @container style(--inline-size-s: var(--breakpoint-sm)) {
+    /* --max-page-width */
+    @media (min-width: 70rem) {
         .floating-category-pill-list {
-            left: var(--spacing-200);
+            top: calc(var(--floating-nav-height) + var(--spacing-400));
+            left: calc((100vw - 70rem) / 2 - var(--spacing-400));
         }
     }
 </style>
 
 <script>
-    const classes = document.querySelector('.category-nav-wrapper').dataset.classes;
+    document.addEventListener('astro:page-load', () => {
+        const pillList = document.querySelector('.category-pill-list');
+        const floatingList = document.querySelector('.floating-category-pill-list');
 
-    const pillList = document.querySelector('.category-pill-list');
-    const floatingList = document.querySelector('.floating-category-pill-list');
+        if (pillList && floatingList) {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            floatingList.classList.remove('visible');
+                            return;
+                        }
 
-    if (pillList && floatingList) {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        floatingList.classList.remove('visible');
-                        return;
-                    }
+                        floatingList.classList.add('visible');
+                    });
+                },
+                { threshold: 0 },
+            );
 
-                    floatingList.classList.add('visible');
-                });
-            },
-            { threshold: 0 },
-        );
+            observer.observe(pillList);
+        }
+    });
 
-        observer.observe(pillList);
-    }
-</script>
+    document.addEventListener('astro:page-load', () => {
+        const headers = document.querySelectorAll('h2');
+        const links = document.querySelectorAll('.floating-category-pill-list .dash-wrapper');
+        const linksArray = Array.from(links);
+        const headersArray = Array.from(headers);
 
-<script>
-    const headers = document.querySelectorAll('h2');
-    const links = document.querySelectorAll('.floating-category-pill-list .dash-wrapper');
-    const linksArray = Array.from(links);
-    const headersArray = Array.from(headers);
+        const MARGIN = 600;
 
-    const MARGIN = 600;
+        if (headersArray.length && linksArray.length) {
+            const headersPastTop = new Set<string>();
 
-    if (headersArray.length && linksArray.length) {
-        const headersPastTop = new Set<string>();
-
-        const updateActiveLink = () => {
-            let activeIndex = 0;
-            headersArray.forEach((header, index) => {
-                if (headersPastTop.has(header.id)) {
-                    activeIndex = index;
-                }
-            });
-
-            linksArray.forEach((link, index) => {
-                link.classList.toggle('selected', index === activeIndex);
-            });
-        };
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    const id = entry.target.id;
-                    if (!entry.isIntersecting && entry.boundingClientRect.top < MARGIN) {
-                        headersPastTop.add(id);
-                    } else {
-                        headersPastTop.delete(id);
+            const updateActiveLink = () => {
+                let activeIndex = 0;
+                headersArray.forEach((header, index) => {
+                    if (headersPastTop.has(header.id)) {
+                        activeIndex = index;
                     }
                 });
-                updateActiveLink();
-            },
-            {
-                threshold: 0,
-                rootMargin: `-${MARGIN}px 0px 0px 0px`,
-            },
-        );
 
-        headersArray.forEach((header) => observer.observe(header));
-        updateActiveLink();
-    }
+                linksArray.forEach((link, index) => {
+                    link.classList.toggle('selected', index === activeIndex);
+                });
+            };
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        const id = entry.target.id;
+                        if (!entry.isIntersecting && entry.boundingClientRect.top < MARGIN) {
+                            headersPastTop.add(id);
+                        } else {
+                            headersPastTop.delete(id);
+                        }
+                    });
+                    updateActiveLink();
+                },
+                {
+                    threshold: 0,
+                    rootMargin: `-${MARGIN}px 0px 0px 0px`,
+                },
+            );
+
+            headersArray.forEach((header) => observer.observe(header));
+            updateActiveLink();
+        }
+    });
 </script>

@@ -57,13 +57,13 @@
         --spacing-700: 7rem;
         --spacing-800: 10rem;
 
-        --full-page-width: min(100%, 70rem);
-        --full-page-padding: 1rem;
+        --max-page-width: 70rem;
+        --full-page-width: min(100%, var(--max-page-width));
+        --full-page-padding: 1.5rem;
 
         --ff-serif: 'EB Garamond', ui-serif, Georgia, serif;
 
-        /*  TODO: update to not rely on tailwind */
-        --ff-sans: Inter, ui-sans-serif, system-ui, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
+        --ff-sans: sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
         --ff-mono: 'Cutive Mono', monospace;
     }
 

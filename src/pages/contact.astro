@@ -3,11 +3,9 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Contact" description="Get in touch with Barbara Siegel Carlson">
-    <section class="page-hero pb-4">
-        <h1>Contact</h1>
-    </section>
-
     <section class="section pt-0">
+        <h1>Contact</h1>
+
         <form action="/form-success/" method="post" name="contact-form" netlify>
             <input type="hidden" name="form-name" value="contact-form" />
 
@@ -41,6 +39,12 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
     fieldset {
         display: grid;
+
+        input,
+        textarea {
+            border: 1px solid var(--color-accent-primary);
+            border-radius: var(--spacing-150);
+        }
     }
 
     button[type='submit'] {
