@@ -2,6 +2,9 @@ body {
     font-size: var(--fs-400);
     font-family: var(--ff-serif);
     line-height: 1.5;
+
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
 }
 
 a {
@@ -47,9 +50,11 @@ html {
     scroll-behavior: smooth;
 }
 
-main {
+main,
+footer {
     max-width: var(--full-page-width);
     padding-inline: var(--full-page-padding);
+    margin-inline: auto;
 }
 
 :not(blockquote) > p ~ p {
