@@ -27,9 +27,8 @@ const siteConfig: SiteConfig = {
     title: 'Barbara Siegel Carlson',
     description: 'Barbara Siegel Carlson, poet',
     image: {
-        src: '../assets/hero.jpg',
-        //  TODO:
-        alt: '',
+        src: '../assets/Barbara-Siegel-Carlson-photo-1.webp',
+        alt: 'Barbara Siegel Carlson, poet',
     },
     headerNavLinks: [
         {
@@ -54,9 +53,6 @@ const siteConfig: SiteConfig = {
         },
     ],
     footerNavLinks: [],
-    newsPerPage: 8,
-    eventsPerPage: 8,
-    worksPerPage: 8,
 };
 
 export default siteConfig;
