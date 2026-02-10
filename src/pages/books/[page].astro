@@ -18,7 +18,7 @@ const { Content } = await render(book);
 ---
 
 <BaseLayout title={title}>
-    <BookPreview imageDirection="left" book={book}>
+    <BookPreview book={book} isLeafPage>
         <Content />
     </BookPreview>
 </BaseLayout>

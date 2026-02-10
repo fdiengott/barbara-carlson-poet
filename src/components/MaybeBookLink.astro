@@ -1,0 +1,48 @@
+---
+interface Props {
+    class?: string;
+    isLink?: boolean;
+    href?: string;
+}
+
+const { class: className, href, isLink } = Astro.props;
+---
+
+{
+    isLink ? (
+        <a href={href} class:list={['book-link', className]}>
+            <slot />
+        </a>
+    ) : (
+        <div class:list={['book-link', className]}>
+            <slot />
+        </div>
+    )
+}
+
+<style>
+    .book-link {
+        display: grid;
+        justify-content: center;
+        margin-block-end: var(--spacing-200);
+    }
+
+    @container style(--inline-size-s: var(--breakpoint-sm)) {
+        .book-link {
+            --_cover-padding: var(--spacing-400);
+            margin-block-end: 0;
+            outline-offset: 3px;
+        }
+
+        .book-link.left {
+            float: left;
+            margin-inline-end: var(--_cover-padding);
+            margin-block-end: var(--_cover-padding);
+        }
+        .book-link.right {
+            float: right;
+            margin-inline-start: var(--_cover-padding);
+            margin-block-end: var(--_cover-padding);
+        }
+    }
+</style>
