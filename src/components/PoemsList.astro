@@ -4,7 +4,12 @@ import type { CollectionEntry } from 'astro:content';
 
 import PoemCard from './PoemCard.astro';
 
-const poems = ((await getCollection('poem')) as CollectionEntry<'poem'>[])?.toSorted((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
+const poemCollection = (await getCollection('poem')) as CollectionEntry<'poem'>[];
+const poems = poemCollection?.toSorted((a, b) => {
+    if (a.data.year === b.data.year) return a.data.title.localeCompare(b.data.title);
+
+    return (b.data.year ?? 0) - (a.data.year ?? 0);
+});
 
 interface Props {
     id: string;
