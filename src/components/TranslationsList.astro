@@ -4,7 +4,11 @@ import type { CollectionEntry } from 'astro:content';
 
 import TranslationCard from './TranslationCard.astro';
 
-const translations = ((await getCollection('translation')) as CollectionEntry<'translation'>[])?.toSorted((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
+const translations = ((await getCollection('translation')) as CollectionEntry<'translation'>[])?.toSorted((a, b) => {
+    const [yearA, yearB] = [a, b].map((x) => x.data.year ?? 0);
+    if (yearA !== yearB) return yearB - yearA;
+    return b.id.localeCompare(a.id);
+});
 
 interface Props {
     id: string;
